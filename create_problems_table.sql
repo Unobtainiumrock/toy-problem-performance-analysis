@@ -11,5 +11,6 @@ CREATE TABLE problems (
     solution_runtime_complexity TEXT NOT NULL DEFAULT 'Unknown',             -- Runtime complexity of the solution
     solution_space_complexity TEXT NOT NULL DEFAULT 'Unknown',               -- Space complexity of the solution
     complexity_explanation TEXT NOT NULL DEFAULT 'No explanation provided',  -- Explanation of the complexity
+    found_optimal_solution INTEGER NOT NULL DEFAULT 0,                       -- Boolean flag for if optimal solution was found
     created_at TIMESTAMP NOT NULL DEFAULT NOW()                              -- Timestamp for row creation
 );

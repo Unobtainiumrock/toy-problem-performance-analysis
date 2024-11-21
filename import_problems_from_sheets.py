@@ -39,7 +39,7 @@ if not tracker_data:
 try:
     changed_rows = np.array([int(row) for row in tracker_data])
     logging.info(f"Changed rows detected: {changed_rows}")
-except ValueError:
+except ValueError as e:
     logging.error("Error parsing row indices from change tracker.")
     raise ValueError("Change tracker contains non-integer row indices.") from e
   
@@ -86,11 +86,12 @@ for (start_row, _), data_range in zip(grouped_ranges, data_ranges):
             row_data[2] if row_data[2] else 'medium',                   # difficulty_level
             row_data[3] if row_data[3] else 'https://www.google.com',   # problem_link
             row_data[4] if row_data[4] else 'https://www.google.com',   # problem_html_link
-            int(row_data[5]) if row_data[5].isdigit() else 0,          # completion_time_minutes
+            int(row_data[5]) if row_data[5].isdigit() else 0,           # completion_time_minutes
             row_data[6] if row_data[6] else 'https://www.google.com',   # solution_link
             row_data[7] if row_data[7] else 'Unknown',                  # solution_runtime_complexity
             row_data[8] if row_data[8] else 'Unknown',                  # solution_space_complexity
             row_data[9] if row_data[9] else 'No explanation provided',  # complexity_explanation
+            row_data[10] if row_data[10] else 0                         # found_optimal_solution
         )
         rows_to_insert.append(row_tuple)
 
@@ -131,7 +132,8 @@ try:
                 INSERT INTO problems (
                     spreadsheet_row_id, problem_name, problem_type, difficulty_level, 
                     problem_link, problem_html_link, completion_time_minutes, solution_link, 
-                    solution_runtime_complexity, solution_space_complexity, complexity_explanation
+                    solution_runtime_complexity, solution_space_complexity, complexity_explanation,
+                    found_optimal_solution
                 ) VALUES %s
                 ON CONFLICT (spreadsheet_row_id) 
                 DO UPDATE SET 
@@ -144,7 +146,8 @@ try:
                     solution_link = EXCLUDED.solution_link,
                     solution_runtime_complexity = EXCLUDED.solution_runtime_complexity,
                     solution_space_complexity = EXCLUDED.solution_space_complexity,
-                    complexity_explanation = EXCLUDED.complexity_explanation;
+                    complexity_explanation = EXCLUDED.complexity_explanation,
+                    found_optimal_solution = EXCLUDED.found_optimal_solution;
                 """,
                 rows_to_insert_native
             )
