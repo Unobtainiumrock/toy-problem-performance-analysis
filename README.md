@@ -182,6 +182,16 @@ Share your Google Sheet with the service account email found in the `credentials
 
 ### Data Ingestion: Importing Data from Google Sheets
 
+**Important**. You must have an `.env` file in the project root with
+
+```
+DB_NAME=database_name_here
+DB_USER=user_name_here
+DB_PASSWORD=password_here
+DB_HOST=localhost
+DB_PORT=port_here
+```
+
 Use the provided script to import data from Google Sheets into PostgreSQL
 
 a. **Run the Data Ingestion Script**
