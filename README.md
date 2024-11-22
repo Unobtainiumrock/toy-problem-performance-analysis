@@ -141,6 +141,19 @@ a. **Create One Google Spreadsheet With Two Sheet Tabs**
 2. **Create Two Worksheets (Tabs) within the Spreadsheet:**
     - **Problems Sheet:**
         - Rename the first sheet tab to `problems`.
+        - Fill the first row with your column labels. These are features I'm currently tracking, in order, from column A to column K:
+          -  `Problem Name `
+          -  `Problem Type`
+          -  `Difficulty Level`
+          -  `Problem Link`
+          -  `Problem HTML Link`
+          -  `Complextion Time In Minutes`
+          -  `Solution Link`, `Solution Runtime Complexity`
+          -  `Solution Space Complexity`, `Complexity Analysis Explanation`
+          -  `Found Optimal Solution`
+            
+        **note: If you add your own features, you'll need to make some modifications across other areas of code base. Not ideal, but I plan to address this at a later time** 
+
     - **Change Tracker Sheet:**
         - Click the "+" button at the bottom to add a new sheet.
         - Rename the second sheet tab to `change_tracker`.
